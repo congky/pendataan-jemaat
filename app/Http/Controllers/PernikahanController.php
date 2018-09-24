@@ -10,10 +10,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Validator;
 
 class PernikahanController extends Controller
 {
+
+    private $mailTo;
+    private $nameMailTo;
 
     public function lihatDataUsulPernikahan() {
         $anggota = DB::Select("
@@ -23,7 +28,11 @@ class PernikahanController extends Controller
                     WHERE flg_menikah IN ('I', 'N')
                 ");
 
-        return view("pernikahan.lihatDataUsulPernikahan", ["anggota" => $anggota]);
+        return view("pernikahan.lihatDataUsulPernikahan",
+                    [
+                        "anggota" => $anggota,
+                        "role" => Session::get("HAS_SESSION")["role"]
+                    ]);
     }
 
     public function lihatDataPernikahan() {
@@ -107,17 +116,34 @@ class PernikahanController extends Controller
 
     }
 
-    public function doProsesDataUsulanPernikahan($usulan_menikah_anggota_id) {
+    public function prepareProsesDataUsulanPernikahan($usulan_menikah_anggota_id) {
+
+        $anggota_menikah = AnggotaMenikah::find($usulan_menikah_anggota_id);
+
+        $anggota = Anggota::find($anggota_menikah->anggota_id);
+        return view("pernikahan.konfirmasiUsulanPernikahan", ["anggota" => $anggota, "nikahId"=>$usulan_menikah_anggota_id]);
+    }
+
+    public function doProsesDataUsulanPernikahan(Request $request, $usulan_menikah_anggota_id) {
 
         $anggota_menikah = AnggotaMenikah::find($usulan_menikah_anggota_id);
         $anggota_menikah->flg_menikah = "Y";
         $anggota_menikah->save();
 
         $anggota = Anggota::find($anggota_menikah->anggota_id);
-        $anggota->tgl_menikah = $anggota_menikah->tgl_menikah;
-        $anggota->save();
 
-        return redirect()->back();
+        $this->mailTo = $anggota->email;
+        $this->nameMailTo = $anggota->nama_lengkap;
+
+        $data = array('pesan'=> $request->get("pesan"),
+            'name'=> $anggota->nama_lengkap);
+        Mail::send('mail', $data, function($message) {
+            $message->to($this->mailTo, $this->nameMailTo)->subject
+            ('Pemberitahuan Pernikahan');
+            $message->from('admin@gmail.com','Admin');
+        });
+
+        return redirect('/lihat-data-usulan-pernikahan');
 
     }
 

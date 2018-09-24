@@ -39,7 +39,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/home" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"></span>
             <!-- logo for regular state and mobile devices -->
@@ -63,7 +63,7 @@
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="javascript:;"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>

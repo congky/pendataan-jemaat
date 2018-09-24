@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\DateUtil;
+use App\User;
+use App\Users;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Anggota;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Baptisan;
 use App\Kematian;
@@ -17,6 +21,9 @@ use App\AnggotaMenikah;
 
 class JemaatController extends Controller
 {
+
+    private $mailTo;
+    private $nameMailTo;
 
     public function viewIndex() {
 
@@ -58,26 +65,41 @@ class JemaatController extends Controller
 
     public function viewUsulanBaptisan() {
 
-        $data_anggota = Anggota::whereIn("flg_baptis", ["I", "N"])->get();
+        $data_anggota = Anggota::whereIn("flg_baptis", ["I", "W"])->get();
 
         return view("jemaat.usulanBaptisan", [
-        	"anggota" => $data_anggota
+        	"anggota" => $data_anggota,
+            "role" => Session::get("HAS_SESSION")["role"]
         ]);
     }
 
-    public function doUsulanBaptisan($anggota_id, $action) {
+    public function usulanBaptisanJemaat($anggota_id) {
 
     	$data_anggota = Anggota::find($anggota_id);
 
-    	$data_anggota->flg_baptis = "N";
+        return view("jemaat.usulanBaptisanJemaat", [
+            "anggota" => $data_anggota
+        ]);
+
+    }
+
+    public function usulanBaptisan($anggota_id, $action) {
+
+        $data_anggota = Anggota::find($anggota_id);
+        $data_anggota->flg_baptis = "W";
+        $data_anggota->save();
+
+        return redirect('/data-jemaat');
+
+    }
+
+    public function simpanUsulanBaptisanJemaat(Request $request) {
+        $data_anggota = Anggota::find(Session::get("HAS_SESSION")["anggota_id"]);
+        $data_anggota->flg_baptis = "W";
+        $data_anggota->tgl_request_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");;
     	$data_anggota->save();
 
-        if($action == "Y"){
-            return redirect('/data-jemaat');
-        } else {
-            return redirect('/lihat-data-diri');
-        }
-
+        return redirect("/usul-baptis/".$data_anggota->anggota_id);
     }
 
      public function viewkonfirmasiUsulan() {
@@ -110,13 +132,16 @@ class JemaatController extends Controller
             "no_kk"         => "required",
             "nama_lengkap"  => "required",
             "alamat"        => "required",
+            "email"        => "required",
             "tempat_lahir"  => "required",
             "tgl_lahir"     => "required",
             "jenis_kelamin" => "required",
             "pekerjaan" => "required",
             "kewarganegaraan" => "required",
             "nama_ayah" => "required",
-            "nama_ibu" => "required"
+            "nama_ibu" => "required",
+            "username" => "required",
+            "password" => "required"
             
             
         ];
@@ -154,16 +179,14 @@ class JemaatController extends Controller
         $jemaat->nama_ayah       = $request->get("nama_ayah");
         $jemaat->nama_ibu          = $request->get("nama_ibu");
 
-//        $jemaat->tgl_menikah   = $request->get("tanggal_menikah");
-
         if(is_null($request->get("flg_baptis"))){
-            $jemaat->flg_baptis = "W";
+            $jemaat->flg_baptis = "N";
         } else {
             $jemaat->flg_baptis = "Y";
         }
 
         $jemaat->flg_active    = "Y";
-        $resultJemaat = $jemaat->save();
+        $jemaat->save();
 
         // $user = new User();
         
@@ -184,6 +207,14 @@ class JemaatController extends Controller
             $baptisan->save();
         }
 
+        $user = new Users();
+        $user->anggota_id = $jemaat->anggota_id;
+        $user->username = $request->get("username");
+        $user->password = md5($request->get("password"));
+        $user->role = "JEMAAT";
+        $user->flg_active = "Y";
+        $user->save();
+
         return redirect("/data-jemaat");
 
     }
@@ -192,9 +223,11 @@ class JemaatController extends Controller
     public function editJemaat ($anggota_id, $action) {
 
         $jemaat = Anggota::find($anggota_id);
+        $user = Users::where('anggota_id',$anggota_id)->first();
 
         return view("jemaat.editJemaat", [
             "anggota" => $jemaat,
+            "username"=> ($user!=null)?$user->username:"",
             "action" => $action
             ]);
 
@@ -208,7 +241,8 @@ class JemaatController extends Controller
             "alamat"        => "required",
             "tempat_lahir"  => "required",
             "tgl_lahir"     => "required",
-            "jenis_kelamin" => "required"
+            "jenis_kelamin" => "required",
+            "username"      => "required"
         ];
 
         $validator = validator:: make($request->all(), $vaidate);
@@ -233,6 +267,37 @@ class JemaatController extends Controller
 //        $jemaat->tgl_menikah = DateUtil::date2string($request->get("tanggal_menikah"), "Ymd");
         $jemaat->save();
 
+        $user = Users::where('anggota_id',$request->get("anggota_id"))->first();
+
+        if($user==null){
+
+            $vaidate = [
+                "username"      => "required",
+                "password"      => "required"
+            ];
+            $validator = validator:: make($request->all(), $vaidate);
+            if ($validator->fails()) {
+                return redirect()
+                    ->back()
+                    ->withInput($request->all())
+                    ->withErrors($validator->errors());
+            }
+
+            $user = new Users();
+            $user->anggota_id = $jemaat->anggota_id;
+            $user->username = $request->get("username");
+            $user->password = md5($request->get("password"));
+            $user->role = "JEMAAT";
+            $user->flg_active = "Y";
+            $user->save();
+
+        } else {
+            $user->username = $request->get("username");
+            if ($request->get("password") != null && $request->get("password") != "") {
+                $user->password = md5($request->get("password"));
+            }
+            $user->save();
+        }
         if($request->get("action") == "Y") {
             return redirect("/data-jemaat");
         } else {
@@ -260,12 +325,26 @@ class JemaatController extends Controller
         $anggota->flg_baptis = "I";
         $anggota->save();
 
+        $this->mailTo = $anggota->email;
+        $this->nameMailTo = $anggota->nama_lengkap;
+
+        $max_no_baptis = collect(DB::Select("SELECT COUNT(1) as count FROM t_baptisan"))->first();
+
         $baptis = new Baptisan();
         $baptis->anggota_id = $anggota->anggota_id;
-        $baptis->no_baptis = "BP".rand(1000, 2000);
-        $baptis->periode_baptis = $request->get("period_baptis");
+        $baptis->no_baptis = "BP".sprintf("%03d", $max_no_baptis->count+1);
+//        $baptis->periode_baptis = $request->get("period_baptis");
         $baptis->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
         $baptis->save();
+
+
+        $data = array('pesan'=> $request->get("pesan"),
+                        'name'=> $anggota->nama_lengkap);
+        Mail::send('mail', $data, function($message) {
+            $message->to($this->mailTo, $this->nameMailTo)->subject
+            ('Pemberitahuan Baptis');
+            $message->from('admin@gmail.com','Admin');
+        });
 
         return redirect("/data-usulan-baptisan");
 
@@ -292,7 +371,7 @@ class JemaatController extends Controller
 
     }
 
-    public function tambahDataKematian() {
+    public function tambahDataKematian($id) {
 
         $anggota = DB::Select("
                     SELECT *
@@ -301,7 +380,13 @@ class JemaatController extends Controller
                     ORDER BY nama_lengkap
                 ");
 
-        return view("jemaat.tambahDataKematian", ["anggota" => $anggota]);
+        $selectedAnggotaId = -99;
+        if(!is_null($id) && $id!=-99){
+            $selectedAnggota = Anggota::find($id);
+            $selectedAnggotaId = $selectedAnggota->anggota_id;
+        }
+
+        return view("jemaat.tambahDataKematian", ["anggota" => $anggota, "selectedAnggotaId"=>$selectedAnggotaId]);
     }
 
     public function doTambahDataKematian(Request $request) {
@@ -389,8 +474,8 @@ class JemaatController extends Controller
         $penyerahan_anak->anggota_id = $request->get("anggota_id");
         $penyerahan_anak->nama_anak = $request->get("nama_anak");
         $penyerahan_anak->tempat_lahir = $request->get("tempat_lahir");
-        $penyerahan_anak->tgl_lahir = $request->get("tgl_lahir");
-        $penyerahan_anak->tgl_penyerahan = $request->get("tgl_penyerahan");
+        $penyerahan_anak->tgl_lahir = DateUtil::date2string($request->get("tgl_lahir"), 'Ymd');
+        $penyerahan_anak->tgl_penyerahan = DateUtil::date2string($request->get("tgl_penyerahan"), 'Ymd');
         $penyerahan_anak->jenis_kelamin = $request->get("jenis_kelamin");
         $penyerahan_anak->nama_ayah = $request->get("nama_ayah");
         $penyerahan_anak->nama_ibu = $request->get("nama_ibu");
@@ -458,17 +543,17 @@ class JemaatController extends Controller
         return $pdf->stream("Cetak".'.pdf');
     }
 
-    public function editBapitsan($id) {
+    public function editBaptisan($id) {
 
         $baptisan = Baptisan::find($id);
         $anggota = Anggota::find($baptisan->anggota_id);
 
-        return view('jemaat.editBapitsan', ["baptisan" => $baptisan, "anggota" => $anggota]);
+        return view('jemaat.editBaptisan', ["baptisan" => $baptisan, "anggota" => $anggota]);
 
 
     }
 
-    public function doEditBapitsan(Request $request) {
+    public function doEditBaptisan(Request $request) {
         $vaidate = [
             "tanggal_baptis" => "required"
         ];
@@ -482,9 +567,9 @@ class JemaatController extends Controller
                 ->withErrors($validator->errors());
         }
 
-        $bapitsan = Baptisan::find($request->get("anggota_baptis_id"));
-        $bapitsan->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
-        $bapitsan->save();
+        $baptisan = Baptisan::find($request->get("anggota_baptis_id"));
+        $baptisan->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
+        $baptisan->save();
 
         return redirect("/data-baptisan");
 

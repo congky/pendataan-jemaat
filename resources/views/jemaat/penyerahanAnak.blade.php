@@ -29,12 +29,12 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Tanggal Lahir <label class="text-danger">*</label></label>
-                            <input type="text" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir">
+                            <input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir">
                             <label class="text-danger">{{$errors->first("tgl_lahir") }}</label>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Tanggal Penyerahan <label class="text-danger">*</label></label>
-                            <input type="text" name="tgl_penyerahan" class="form-control" placeholder="Tanggal Penyerahan">
+                            <input type="date" name="tgl_penyerahan" class="form-control" placeholder="Tanggal Penyerahan">
                             <label class="text-danger">{{$errors->first("tgl_penyerahan") }}</label>
                         </div>
 

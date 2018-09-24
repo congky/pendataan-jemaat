@@ -11,9 +11,9 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-
-            <a href="/tambah-data-kematian" class="btn btn-primary">Tambah Data Kematian</a><br><br>
-
+        <!--
+            <a href="/tambah-data-kematian/-99" class="btn btn-primary">Tambah Data Kematian</a><br><br>
+-->
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>

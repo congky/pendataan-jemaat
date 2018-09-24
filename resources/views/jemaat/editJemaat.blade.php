@@ -45,13 +45,13 @@
 
         <div class="form-group">
           <label for="exampleInputFile">Username <label class="text-danger">*</label></label>
-          <input type="text" name="username"  class="form-control" value="{{ $anggota->username}}" >
+          <input type="text" name="username"  class="form-control" value="{{ $username}}" >
           <label class="text-danger">{{$errors->first("username") }}</label>
         </div>
 
         <div class="form-group">
           <label for="exampleInputFile">Password</label>
-          <input type="email" name="password" class="form-control" value="{{ $anggota->password }}" >
+          <input type="password" name="password" class="form-control" value="{{ $anggota->password }}" >
           <label class="text-danger">{{$errors->first("password") }}</label>
         </div>
 
@@ -94,7 +94,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputFile">Pekerjaan <label class="text-danger">*</label></label>
-          <input type="date" name="pekerjaan"  class="form-control" value="{{ $anggota->pekerjaan }}" }}" >
+          <input type="text" name="pekerjaan"  class="form-control" value="{{ $anggota->pekerjaan }}" }}" >
        <label class="text-danger">{{$errors->first("pekerjaan") }}</label>
         </div>
 <div class="form-group">
@@ -120,7 +120,7 @@
 
   <div class="form-group">
       <label for="exampleInputFile">Nama Ibu <label class="text-danger">*</label></label>
-      <input type="text" name="nama_ibu" class="form-control" placeholder="Nama Ibu" value="{{ $menikah->nama_ibu }}">
+      <input type="text" name="nama_ibu" class="form-control" placeholder="Nama Ibu" value="{{ $anggota->nama_ibu }}">
       <label class="text-danger">{{$errors->first("nama_ibu") }}</label>
   </div>
 

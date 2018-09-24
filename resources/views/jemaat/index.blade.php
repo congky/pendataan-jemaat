@@ -28,7 +28,7 @@
                     <th>No KK</th>
                     <th>Nama Lengkap</th>
                     <th>Alamat</th>
-                    <th>JK</th>>
+                    <th>JK</th>
                     <th>No telepon</th>
                     <th>Tanggal Lahir</th>
                 </tr>
@@ -46,11 +46,14 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/edit-jemaat/{{  $value->anggota_id }}/Y">Ubah</a></li>
-                                    @if($value->flg_baptis == "W")
+                                    @if($value->flg_baptis == "N")
                                         <li><a href="/usul-baptis/{{ $value->anggota_id }}/Y">Usul Baptisan</a></li>
                                     @endif
                                     @if($value->flg_baptis == "Y" && $value->flg_active != "N")
                                         <li><a href="/penyerahan-anak/{{ $value->anggota_id }}">Penyerahan Anak</a></li>
+                                    @endif
+                                    @if($value->flg_active != "N")
+                                        <li><a href="/tambah-data-kematian/{{ $value->anggota_id }}">Tambah Data Kematian</a></li>
                                     @endif
                                 </ul>
                             </div>

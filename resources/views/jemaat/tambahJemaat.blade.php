@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleInputPassword1">Nama Lengkap <label class="text-danger">*</label></label>
+          <label for="exampleInputNamaLengkap">Nama Lengkap <label class="text-danger">*</label></label>
           <input type="text" name="nama_lengkap" class="form-control" placeholder="nama lengkap">
           <label class="text-danger">{{$errors->first("nama_lengkap") }}</label>
         </div>
@@ -36,9 +36,22 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleInputFile">Email</label>
+          <label for="exampleInputFile">Email <label class="text-danger">*</label></label>
           <input type="email" name="email" class="form-control" placeholder="email" >
+            <label class="text-danger">{{$errors->first("email") }}</label>
         </div>
+
+          <div class="form-group">
+              <label for="exampleInputUsername">Username <label class="text-danger">*</label></label>
+              <input type="text" name="username" class="form-control" placeholder="username">
+              <label class="text-danger">{{$errors->first("username") }}</label>
+          </div>
+
+          <div class="form-group">
+              <label for="exampleInputUsername">Password <label class="text-danger">*</label></label>
+              <input type="password" name="password" class="form-control" placeholder="password">
+              <label class="text-danger">{{$errors->first("password") }}</label>
+          </div>
 
         <div class="form-group">
           <label for="exampleInputPassword1">Jenis Kelamin <label class="text-danger">*</label></label> <br>
@@ -77,6 +90,7 @@
        <label for="exampleInputFile">Kewarganegaraan <label class="text-danger">*</label></label>
          <select name="kewarganegaraan" class="form-control">
         <option value="WNI" selected>WNI</option>
+             <option value="WNA" selected>WNA</option>
        </select>
         <label class="text-danger">{{$errors->first("kewarganegaraan") }}</label>
        </div>

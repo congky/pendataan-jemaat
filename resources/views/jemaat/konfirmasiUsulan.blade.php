@@ -26,20 +26,8 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleInputFile">Periode Baptis <label class="text-danger">*</label></label>
-          <select name="period_baptis" class="form-control">
-                    <option value="1">Minggu 1</option>
-                    <option value="2">Minggu 2</option>
-                    <option value="3">Minggu 3</option>
-                    <option value="4">Minggu 4</option>
-                    <option value="5">Minggu 5</option>
-                  </select>
-         <label class="text-danger">{{$errors->first("period_baptis") }}</label>
-        </div>
-
-        <div class="form-group">
           <label for="exampleInputPassword1">Tanggal Baptis <label class="text-danger">*</label></label>
-          <input type="date" name="tanggal_baptis" class="form-control" placeholder="Tanggal Baptis">
+          <input type="date" name="tanggal_baptis" class="form-control" placeholder="Tanggal Baptis" value="{{ $anggota->tgl_request_baptis }}">
           <label class="text-danger">{{$errors->first("tanggal_baptis") }}</label>
         </div>
 

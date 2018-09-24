@@ -1,6 +1,6 @@
 @extends("default.default")
 @section("head")
-    <title>Home</title>
+    <title>Usulan menikah</title>
 @endsection
 
 @section("content")

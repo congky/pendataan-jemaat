@@ -1,11 +1,11 @@
-<section class="sidebar">
+<section class="sidebar" style="font-size: 15px">
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
             <img src="{{ URL::asset('admin-lte') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-            <p>{{ \Session::get("HAS_SESSION")["username"] }}</p>
+            <p>{{ \Session::get("HAS_SESSION")["nama_lengkap"] }}</p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
     </div>
@@ -30,7 +30,7 @@
         @endif
 
         @if(authorized("JEMAAT"))
-        <li><a href="/jemaat-usul-baptis"><i class="fa fa-circle-o text-red"></i> <span>Usulan Baptisan</span></a></li>
+        <li><a href="/usul-baptis/{{ Session::get("HAS_SESSION")["anggota_id"] }}"><i class="fa fa-circle-o text-red"></i> <span>Usulan Baptisan</span></a></li>
         @endif
 
         @if(authorized("ADMIN,PENDETA"))
@@ -46,7 +46,11 @@
         @endif
 
         @if(authorized("ADMIN"))
-        <li><a href="/lihat-data-pernikahan"><i class="fa fa-circle-o text-aqua"></i> <span>Data Pernikahan</span></a></li>
+            <li><a href="/lihat-data-pernikahan"><i class="fa fa-circle-o text-aqua"></i> <span>Data Pernikahan</span></a></li>
+        @endif
+
+        @if(authorized("JEMAAT"))
+            <li><a href="/usul-menikah-jemaat/{{ \Session::get("HAS_SESSION")["anggota_id"] }}"><i class="fa fa-circle-o text-red"></i> Usul Menikah</a></li>
         @endif
 
         @if(authorized("ADMIN,PENDETA"))

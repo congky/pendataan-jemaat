@@ -1,6 +1,6 @@
 @extends("default.default")
 @section("head")
-    <title>Home</title>
+    <title>Usulan pernikahan</title>
 @endsection
 
 @section("content")
@@ -17,7 +17,12 @@
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Aksi</th>
+                    <th>@if($role=="PENDETA")
+                            Status
+                        @else
+                            Aksi
+                        @endif
+                    </th>
                     <th>No Jemaat</th>
                     <th>Tanggal Daftar</th>
                     <th>Tanggal Menikah</th>
@@ -31,16 +36,20 @@
                     <tr>
                         <td>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-info">Aksi</button>
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/edit-data-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}/usul">Edit</a></li>
-                                    <li><a href="/proses-data-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}">Konfirmasi</a></li>
-                                    <li><a href="/hapus-data-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}">Hapus</a></li>
-                                </ul>
+                                @if($role=="PENDETA")
+                                    Menunggu konfirmasi
+                                @else
+                                    <button type="button" class="btn btn-info">Aksi</button>
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/edit-data-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}/usul">Edit</a></li>
+                                        <li><a href="/prepare-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}">Konfirmasi</a></li>
+                                        <li><a href="/hapus-data-usulan-pernikahan/{{  $value->usul_anggota_menikah_id }}">Hapus</a></li>
+                                    </ul>
+                                @endif
                             </div>
                         </td>
                         <td>{{ $value->no_anggota}}</td>

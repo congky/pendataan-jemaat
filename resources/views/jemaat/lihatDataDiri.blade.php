@@ -1,6 +1,6 @@
 @extends("default.default")
 @section("head")
-    <title>Home</title>
+    <title>Lihat data diri</title>
 @endsection
 
 @section("content")
@@ -12,10 +12,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <a href="/edit-jemaat/{{ Session::get("HAS_SESSION")["anggota_id"] }}/N" class="btn btn-primary">Edit Data Diri</a>
-            @if(!$exists)
-                <a href="/usul-baptis/{{ Session::get("HAS_SESSION")["anggota_id"] }}/N" class="btn btn-primary">Usul Baptisan</a>
-            @endif
-            <a href="/usul-menikah-jemaat/{{ Session::get("HAS_SESSION")["anggota_id"] }}" class="btn btn-primary">Usul Menikah</a>
+
             <br><br>
             <div class="row">
                 <div class="col-md-6">
@@ -48,7 +45,7 @@
                         <input type="text" value="{{ $anggota->alamat }}" class="form-control" readonly>
                     </div>
                 </div>
-
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
                         <input type="text" value="{{ $anggota->email }}" class="form-control" readonly>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Anggota;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -25,6 +26,8 @@ class LoginController extends Controller
 
         if(!is_null($user)) {
 
+            $anggota = Anggota::find($user->anggota_id);
+
             if($user->password != md5($password)) {
                 return redirect()->back()->with("message", "Password tidak cocok");
             }
@@ -33,7 +36,8 @@ class LoginController extends Controller
                 "user_id" => $user->user_id,
                 "role" => $user->role,
                 "username" => $user->username,
-                "anggota_id" => $user->anggota_id
+                "anggota_id" => $user->anggota_id,
+                "nama_lengkap" => !is_null($anggota) ? $anggota->nama_lengkap : $user->username
             ]);
 
             return redirect("/home");

@@ -21,7 +21,11 @@
                     <select name="jemaat" class="form-control">
                         <option value="" selected>-- Pilih Jemaat --</option>
                         @foreach($anggota as $key=>$value)
-                            <option value="{{ $value->anggota_id }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                            @if($selectedAnggotaId==$value->anggota_id)
+                                <option value="{{ $value->anggota_id }}" selected>{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                            @else
+                                <option value="{{ $value->anggota_id }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                            @endif
                         @endforeach
                     </select>
                     <label class="text-danger">{{$errors->first("jemaat") }}</label>
