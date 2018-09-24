@@ -1,1 +1,1 @@
-web: vendor/bin/pendataan-jemaat public/
+web: vendor/bin/heroku-php-apache2 public/
