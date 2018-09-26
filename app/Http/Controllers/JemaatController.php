@@ -165,7 +165,7 @@ class JemaatController extends Controller
         $max_no_anggota = collect(DB::Select("SELECT COUNT(1) as count FROM t_anggota"))->first();
 
         $jemaat = new Anggota();
-        $jemaat->no_anggota    = "TA".sprintf("%03d", $max_no_anggota->count+1);
+        $jemaat->no_anggota    = 'A'.substr(date('Y'), -2).sprintf("%04d", $max_no_anggota->count+1);
         $jemaat->no_kk         = $request->get("no_kk");
         $jemaat->nama_lengkap  = $request->get("nama_lengkap");
         $jemaat->alamat        = $request->get("alamat");
@@ -332,7 +332,7 @@ class JemaatController extends Controller
 
         $baptis = new Baptisan();
         $baptis->anggota_id = $anggota->anggota_id;
-        $baptis->no_baptis = "BP".sprintf("%03d", $max_no_baptis->count+1);
+        $baptis->no_baptis = 'B'.substr(date('Y'), -2).sprintf("%04d", $max_no_baptis->count+1);
 //        $baptis->periode_baptis = $request->get("period_baptis");
         $baptis->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
         $baptis->save();
