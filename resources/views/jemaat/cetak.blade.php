@@ -21,8 +21,7 @@
         <td height="58" colspan="3"><div align="center"><strong><center>SURAT TANDA BAPTIS</center></strong> </div></td>
     </tr>
     <tr>
-        <td height="55" colspan="3"><p>Majelis  Gereja Injili di Tanah Jawa (GITJ) Puring </p>
-            <p>menerangkan dengan sesungguhnya bahwa  Saudara yang tersebut di bawah ini :<br />
+        <td height="55" colspan="3"><p>Majelis  Gereja Injili di Tanah Jawa (GITJ) Puring menerangkan dengan sesungguhnya bahwa  Saudara yang tersebut di bawah ini :<br />
             </p></td>
     </tr>
     <tr>
@@ -67,11 +66,11 @@
     <tr>
         <td height="27" colspan="3"><table width="760" height="52" border="0">
                 <tr>
-                    <td width="369"><p align="center">Sekretaris,</p>
+                    <td width="369"><p align="center">Gembala Sidang,</p>
                         <p align="center">&nbsp;</p><br><br>
                         <p align="center">Harnoto Badi</p></td>
                     <td width="381"><p align="center">Jepara,  {{ \App\Helpers\DateUtil::date2_display($baptisan->tanggal_baptis) }}<br />
-                            Gembala Sidang,</p>
+                            Sekretaris, </p>
                         <p align="center">&nbsp;</p><br><br>
                         <p align="center">Pdt. Herlistyana S.th </p></td>
                 </tr>
