@@ -31,7 +31,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="javascript:;"><b>Masuk</b></a>
+        <a href="javascript:;"><b>Login</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
