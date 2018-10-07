@@ -39,7 +39,7 @@ class JemaatController extends Controller
         $no_anggota = \Session::get("HAS_SESSION")["no_anggota"];
         $data_anggota = Anggota::find($no_anggota);
 
-        $baptisan = collect(\DB::Select(" SELECT * FROM t_baptisan WHERE no_anggota = $no_anggota "))->first();
+        $baptisan = collect(\DB::Select(" SELECT * FROM t_baptisan WHERE no_anggota = '$no_anggota' "))->first();
         $is_exists = false;
         if(!is_null($baptisan)) {
             $is_exists = true;
