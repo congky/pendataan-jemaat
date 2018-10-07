@@ -15,7 +15,7 @@
 
                 <form role="form" action="/simpan-penyerahan-anak" method="post">
                     {{ csrf_field() }}
-                    <input type="hidden" name="anggota_id" class="form-control" value="{{ $anggota->anggota_id }}">
+                    <input type="hidden" name="no_anggota" class="form-control" value="{{ $anggota->no_anggota }}">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputFile">Nama Anak <label class="text-danger">*</label></label>

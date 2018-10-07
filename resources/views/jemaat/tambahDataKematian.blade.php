@@ -9,7 +9,11 @@
         <div class="box-header with-border">
             <h3 class="box-title">Tambah Data Kematian</h3>
         </div>
-
+        @if(Session::has("err_msg"))
+        <div class="alert alert-danger">
+            <strong>Danger!</strong> {{Session::get("err_msg")}}.
+        </div>
+        @endif
         <!-- /.box-header -->
         <!-- form start -->
         <form role="form" action="/simpan-data-kematian" method="post">
@@ -21,10 +25,10 @@
                     <select name="jemaat" class="form-control">
                         <option value="" selected>-- Pilih Jemaat --</option>
                         @foreach($anggota as $key=>$value)
-                            @if($selectedAnggotaId==$value->anggota_id)
-                                <option value="{{ $value->anggota_id }}" selected>{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                            @if($selectedAnggotaId==$value->no_anggota)
+                                <option value="{{ $value->no_anggota }}" selected>{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
                             @else
-                                <option value="{{ $value->anggota_id }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                                <option value="{{ $value->no_anggota }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
                             @endif
                         @endforeach
                     </select>

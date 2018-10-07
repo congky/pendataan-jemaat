@@ -25,7 +25,7 @@
                                 <select name="jemaat" class="form-control">
                                     <option value="" selected>-- Pilih Jemaat --</option>
                                     @foreach($anggota as $key=>$value)
-                                        <option value="{{ $value->anggota_id }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
+                                        <option value="{{ $value->no_anggota }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
                                     @endforeach
                                 </select>
                                 <label class="text-danger">{{$errors->first("jemaat") }}</label>

@@ -32,14 +32,14 @@
                                 @if($role=="PENDETA")
                                     Menunggu konfirmasi
                                 @else
-                                    <a href="/konfirmasi-usul-baptis/{{ $value->anggota_id }}">Konfirmasi</a>
+                                    <a href="/konfirmasi-usul-baptis/{{ $value->no_anggota }}">Konfirmasi</a>
                                 @endif
                             @endif
                             @if($value->flg_baptis == "I")
                                 @if($role=="PENDETA")
                                     Konfirmasi
                                 @else
-                                    <a href="/proses-usul-baptis/{{ $value->anggota_id }}">Proses</a>
+                                    <a href="/proses-usul-baptis/{{ $value->no_anggota }}">Proses</a>
                                 @endif
                             @endif
                         </td>

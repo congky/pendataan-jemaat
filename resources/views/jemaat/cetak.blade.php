@@ -25,18 +25,6 @@
             </p></td>
     </tr>
     <tr>
-        <td width="50" height="34">&nbsp;</td>
-        <td width="159">Nomer baptis </td>
-        <td width="543">:
-            {{ $baptisan->no_baptis }}
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>No Anggota </td>
-        <td>:
-        {{ $anggota->no_anggota }}
-    </tr>
-    <tr>
         <td>&nbsp;</td>
         <td>Nama</td>
         <td>:
@@ -46,7 +34,13 @@
         <td height="40">&nbsp;</td>
         <td>Tempat, Tanggal Lahir </td>
         <td>:
-        {{ $anggota->tempat_lahir }}, {{ \App\Helpers\DateUtil::date2_display($anggota->tgl_lahir) }}
+            {{ $anggota->tempat_lahir }}, {{ \App\Helpers\DateUtil::date2_display($anggota->tgl_lahir) }}
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>No Anggota </td>
+        <td>:
+        {{ $anggota->no_anggota }}
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -56,20 +50,27 @@
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td>Tanggal </td>
+        <td>Pada Tanggal </td>
         <td>:
         {{ \App\Helpers\DateUtil::date2_display($baptisan->tanggal_baptis) }}
     </tr>
     <tr>
         <td height="48" colspan="3">Telah  menyatakan imannya kepada Tuhan Yesus Kristus dan dibaptis dengan  disaksikan oleh Jemaat GITJ Puring.</td>
     </tr>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <tr>
         <td height="27" colspan="3"><table width="760" height="52" border="0">
                 <tr>
-                    <td width="369"><p align="center">Gembala Sidang,</p>
+                    <td style="width: 35%; text-align: center"><p>Gembala Sidang,</p>
                         <p align="center">&nbsp;</p><br><br>
                         <p align="center">Harnoto Badi</p></td>
-                    <td width="381"><p align="center">Jepara,  {{ \App\Helpers\DateUtil::date2_display($baptisan->tanggal_baptis) }}<br />
+                    <td style="width: 75%; text-align: center"><p align="center">Jepara,  {{ \App\Helpers\DateUtil::date2_display($baptisan->tanggal_baptis) }}<br />
                             Sekretaris, </p>
                         <p align="center">&nbsp;</p><br><br>
                         <p align="center">Pdt. Herlistyana S.th </p></td>

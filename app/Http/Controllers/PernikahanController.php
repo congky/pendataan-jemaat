@@ -24,7 +24,7 @@ class PernikahanController extends Controller
         $anggota = DB::Select("
                     SELECT *
                     FROM t_anggota A
-                    INNER JOIN t_anggota_menikah B ON A.anggota_id = B.anggota_id
+                    INNER JOIN t_anggota_menikah B ON A.no_anggota = B.no_anggota
                     WHERE flg_menikah IN ('I', 'N')
                 ");
 
@@ -39,7 +39,7 @@ class PernikahanController extends Controller
         $anggota = DB::Select("
                     SELECT *
                     FROM t_anggota A
-                    INNER JOIN t_anggota_menikah B ON A.anggota_id = B.anggota_id
+                    INNER JOIN t_anggota_menikah B ON A.no_anggota = B.no_anggota
                     WHERE flg_menikah IN ('Y')
                 ");
 
@@ -51,7 +51,7 @@ class PernikahanController extends Controller
         $anggota = DB::Select("
                     SELECT *
                     FROM t_anggota A
-                    WHERE NOT EXISTS (SELECT 1 FROM t_anggota_menikah B WHERE A.anggota_id = B.anggota_id)
+                    WHERE NOT EXISTS (SELECT 1 FROM t_anggota_menikah B WHERE A.no_anggota = B.no_anggota)
                       AND A.flg_active = 'Y'
                     ORDER BY nama_lengkap
                 ");
@@ -88,7 +88,7 @@ class PernikahanController extends Controller
         }
 
         $menikah = new AnggotaMenikah();
-        $menikah->anggota_id = $request->get("jemaat");
+        $menikah->no_anggota = $request->get("jemaat");
         $menikah->tgl_daftar = DateUtil::date2string($request->get('tgl_daftar'), 'Ymd');
         $menikah->nama_lengkap_pasangan = $request->get("nama_lengkap_pasangan");
         $menikah->tempat_lahir_pasangan = $request->get("tempat_lahir_pasangan");
@@ -120,7 +120,7 @@ class PernikahanController extends Controller
 
         $anggota_menikah = AnggotaMenikah::find($usulan_menikah_anggota_id);
 
-        $anggota = Anggota::find($anggota_menikah->anggota_id);
+        $anggota = Anggota::find($anggota_menikah->no_anggota);
         return view("pernikahan.konfirmasiUsulanPernikahan", ["anggota" => $anggota, "nikahId"=>$usulan_menikah_anggota_id]);
     }
 
@@ -130,7 +130,7 @@ class PernikahanController extends Controller
         $anggota_menikah->flg_menikah = "Y";
         $anggota_menikah->save();
 
-        $anggota = Anggota::find($anggota_menikah->anggota_id);
+        $anggota = Anggota::find($anggota_menikah->no_anggota);
 
         $this->mailTo = $anggota->email;
         $this->nameMailTo = $anggota->nama_lengkap;
@@ -151,7 +151,7 @@ class PernikahanController extends Controller
 
         $menikah = AnggotaMenikah::find($id);
 
-        $anggota = Anggota::find($menikah->anggota_id);
+        $anggota = Anggota::find($menikah->no_anggota);
 
         return view("pernikahan.editDataPernikahan", [
             "menikah" => $menikah,

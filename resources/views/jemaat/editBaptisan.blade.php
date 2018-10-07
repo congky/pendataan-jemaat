@@ -15,7 +15,7 @@
         <form action="/edit-data-baptisan" method="post">
 
         {{ csrf_field() }}
-        <input type="hidden" name="anggota_baptis_id" class="form-control" value="{{ $baptisan->anggota_baptis_id }}">
+        <input type="hidden" name="no_baptis" class="form-control" value="{{ $baptisan->no_baptis }}">
         <div class="box-body">
             <div class="form-group">
                 <label for="exampleInputPassword1">No Anggota <label class="text-danger">*</label></label>

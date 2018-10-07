@@ -15,7 +15,7 @@
    <form action="/edit-daftar-jemaat01" method="post">
 
   {{ csrf_field() }}
-  <input type="hidden" name="anggota_id" class="form-control" value="{{ $anggota->anggota_id }}">
+  <input type="hidden" name="no_anggota" class="form-control" value="{{ $anggota->no_anggota }}">
   <input type="hidden" name="action" class="form-control" value="{{ $action }}">
       <div class="box-body">
         <div class="form-group">
