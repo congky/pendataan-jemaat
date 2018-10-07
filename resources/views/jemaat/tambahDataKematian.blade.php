@@ -11,7 +11,7 @@
         </div>
         @if(Session::has("err_msg"))
         <div class="alert alert-danger">
-            <strong>Danger!</strong> {{Session::get("err_msg")}}.
+            {{Session::get("err_msg")}}.
         </div>
         @endif
         <!-- /.box-header -->

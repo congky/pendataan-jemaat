@@ -1,13 +1,13 @@
 <h2 style="text-align:center;">DATA JEMAAT GITJ PURING JEPARA TAHUN 2018</h2><br>
 <br>
 <br>
-<table border="1" align="center" border-collapse="collapse">
-    <tr>
+<table border="1" align="center" >
+    <tr >
         <td><b>No</td>
         <td><b>No Anggota</td>
         <td><b>No KK</td>
         <td><b>Nama Lengkap</td>
-        <td><b>Alamat</td>
+        <td style="width:20%;"><b>Alamat</td>
         <td><b>JK</td>
         <td><b>No Telp</td>
         <td><b>Tanggal Lahir</td>
