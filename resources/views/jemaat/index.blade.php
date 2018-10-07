@@ -45,15 +45,15 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/edit-jemaat/{{  $value->anggota_id }}/Y">Ubah</a></li>
+                                    <li><a href="/edit-jemaat/{{  $value->no_anggota }}/Y">Ubah</a></li>
                                     @if($value->flg_baptis == "N")
-                                        <li><a href="/usul-baptis/{{ $value->anggota_id }}/Y">Usul Baptisan</a></li>
+                                        <li><a href="/usul-baptis/{{ $value->no_anggota }}/Y">Usul Baptisan</a></li>
                                     @endif
                                     @if($value->flg_baptis == "Y" && $value->flg_active != "N")
-                                        <li><a href="/penyerahan-anak/{{ $value->anggota_id }}">Penyerahan Anak</a></li>
+                                        <li><a href="/penyerahan-anak/{{ $value->no_anggota }}">Penyerahan Anak</a></li>
                                     @endif
                                     @if($value->flg_active != "N")
-                                        <li><a href="/tambah-data-kematian/{{ $value->anggota_id }}">Tambah Data Kematian</a></li>
+                                        <li><a href="/tambah-data-kematian/{{ $value->no_anggota }}">Tambah Data Kematian</a></li>
                                     @endif
                                 </ul>
                             </div>

@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if(!is_null($user)) {
 
-            $anggota = Anggota::find($user->anggota_id);
+            $anggota = Anggota::find($user->no_anggota);
 
             if($user->password != md5($password)) {
                 return redirect()->back()->with("message", "Password tidak cocok");
@@ -36,7 +36,7 @@ class LoginController extends Controller
                 "user_id" => $user->user_id,
                 "role" => $user->role,
                 "username" => $user->username,
-                "anggota_id" => $user->anggota_id,
+                "no_anggota" => $user->no_anggota,
                 "nama_lengkap" => !is_null($anggota) ? $anggota->nama_lengkap : $user->username
             ]);
 

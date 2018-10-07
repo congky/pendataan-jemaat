@@ -18,7 +18,7 @@
         <div class="form-group">
             {{ csrf_field() }}
 
-            <input type="hidden" readonly name="anggota_id" class="form-control" value="{{ $anggota->anggota_id }}">
+            <input type="hidden" readonly name="no_anggota" class="form-control" value="{{ $anggota->no_anggota }}">
 
             <label for="exampleInputPassword1">Nama Anggota</label>
             <input type="text" readonly class="form-control"

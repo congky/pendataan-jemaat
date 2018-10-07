@@ -11,7 +11,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <a href="/edit-jemaat/{{ Session::get("HAS_SESSION")["anggota_id"] }}/N" class="btn btn-primary">Edit Data Diri</a>
+            <a href="/edit-jemaat/{{ Session::get("HAS_SESSION")["no_anggota"] }}/N" class="btn btn-primary">Edit Data Diri</a>
 
             <br><br>
             <div class="row">

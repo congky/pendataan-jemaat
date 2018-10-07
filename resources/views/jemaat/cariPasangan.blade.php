@@ -23,7 +23,7 @@
                 @foreach($anggota as $key=>$value)
                     <tr>
                         <td>
-                            <a href="/penyerahan-anak/{{ $value->anggota_id }}">Jadikan Pasangan</a>
+                            <a href="/penyerahan-anak/{{ $value->no_anggota }}">Jadikan Pasangan</a>
                         </td>
                         <td>{{ $value->no_anggota}}</td>
                         <td>{{ $value->nama_lengkap}}</td>

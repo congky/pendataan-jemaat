@@ -33,8 +33,8 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/edit-baptisan/{{  $value->anggota_baptis_id }}">Ubah</a></li>
-                                    <li><a href="/cetak-baptisan/{{ $value->anggota_baptis_id }}" target="_blank">Cetak</a></li>
+                                    <li><a href="/edit-baptisan/{{  $value->no_baptis }}">Ubah</a></li>
+                                    <li><a href="/cetak-baptisan/{{ $value->no_baptis }}" target="_blank">Cetak</a></li>
                                 </ul>
                             </div>
                         </td>

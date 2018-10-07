@@ -36,10 +36,10 @@ class JemaatController extends Controller
 
     public function viewLihatDataDiri() {
 
-        $anggota_id = \Session::get("HAS_SESSION")["anggota_id"];
-        $data_anggota = Anggota::find($anggota_id);
+        $no_anggota = \Session::get("HAS_SESSION")["no_anggota"];
+        $data_anggota = Anggota::find($no_anggota);
 
-        $baptisan = collect(\DB::Select(" SELECT * FROM t_baptisan WHERE anggota_id = $anggota_id "))->first();
+        $baptisan = collect(\DB::Select(" SELECT * FROM t_baptisan WHERE no_anggota = $no_anggota "))->first();
         $is_exists = false;
         if(!is_null($baptisan)) {
             $is_exists = true;
@@ -55,7 +55,7 @@ class JemaatController extends Controller
     public function viewBaptisan() {
 
     	$data_anggota = Anggota::where("flg_baptis", "Y")
-            ->join("t_baptisan", "t_anggota.anggota_id","=","t_baptisan.anggota_id")
+            ->join("t_baptisan", "t_anggota.no_anggota","=","t_baptisan.no_anggota")
             ->get();
 
         return view("jemaat.baptisan", [
@@ -73,9 +73,9 @@ class JemaatController extends Controller
         ]);
     }
 
-    public function usulanBaptisanJemaat($anggota_id) {
+    public function usulanBaptisanJemaat($no_anggota) {
 
-    	$data_anggota = Anggota::find($anggota_id);
+    	$data_anggota = Anggota::find($no_anggota);
 
         return view("jemaat.usulanBaptisanJemaat", [
             "anggota" => $data_anggota
@@ -83,9 +83,9 @@ class JemaatController extends Controller
 
     }
 
-    public function usulanBaptisan($anggota_id, $action) {
+    public function usulanBaptisan($no_anggota, $action) {
 
-        $data_anggota = Anggota::find($anggota_id);
+        $data_anggota = Anggota::find($no_anggota);
         $data_anggota->flg_baptis = "W";
         $data_anggota->save();
 
@@ -94,12 +94,12 @@ class JemaatController extends Controller
     }
 
     public function simpanUsulanBaptisanJemaat(Request $request) {
-        $data_anggota = Anggota::find(Session::get("HAS_SESSION")["anggota_id"]);
+        $data_anggota = Anggota::find(Session::get("HAS_SESSION")["no_anggota"]);
         $data_anggota->flg_baptis = "W";
         $data_anggota->tgl_request_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");;
     	$data_anggota->save();
 
-        return redirect("/usul-baptis/".$data_anggota->anggota_id);
+        return redirect("/usul-baptis/".$data_anggota->no_anggota);
     }
 
      public function viewkonfirmasiUsulan() {
@@ -112,9 +112,9 @@ class JemaatController extends Controller
     }
 
 
-    public function konfirmasiUsulan($anggota_id) {
+    public function konfirmasiUsulan($no_anggota) {
 
-        $data_anggota = Anggota::find($anggota_id);
+        $data_anggota = Anggota::find($no_anggota);
 
         return view("jemaat.konfirmasiUsulan")->with("anggota", $data_anggota);
 
@@ -188,19 +188,9 @@ class JemaatController extends Controller
         $jemaat->flg_active    = "Y";
         $jemaat->save();
 
-        // $user = new User();
-        
-        // $user->anggota_id = $resultJemaat->anggota_id;
-        // $user->username = $request->get("username");
-        // $user->password = md5($request->get("password"));
-        // $user->role = 'JEMAAT';
-        // $user->flg_active = 'Y';
-
-        // $user->save();
-
         if(!is_null($request->get("flg_baptis"))){
             $baptisan = new Baptisan();
-            $baptisan->anggota_id       = $jemaat->anggota_id;
+            $baptisan->no_anggota       = $jemaat->no_anggota;
             $baptisan->no_baptis        = $request->get("no_baptis");
             $baptisan->periode_baptis    = '0';
             $baptisan->tanggal_baptis   = DateUtil::date2string($request->get($request->get("tanggal_baptis"), "Ymd"));
@@ -208,7 +198,7 @@ class JemaatController extends Controller
         }
 
         $user = new Users();
-        $user->anggota_id = $jemaat->anggota_id;
+        $user->no_anggota = $jemaat->no_anggota;
         $user->username = $request->get("username");
         $user->password = md5($request->get("password"));
         $user->role = "JEMAAT";
@@ -220,10 +210,10 @@ class JemaatController extends Controller
     }
 
 
-    public function editJemaat ($anggota_id, $action) {
+    public function editJemaat ($no_anggota, $action) {
 
-        $jemaat = Anggota::find($anggota_id);
-        $user = Users::where('anggota_id',$anggota_id)->first();
+        $jemaat = Anggota::find($no_anggota);
+        $user = Users::where('no_anggota',$no_anggota)->first();
 
         return view("jemaat.editJemaat", [
             "anggota" => $jemaat,
@@ -254,7 +244,7 @@ class JemaatController extends Controller
             ->withErrors($validator->errors());
         }
         
-        $jemaat = Anggota:: find($request->get("anggota_id"));
+        $jemaat = Anggota:: find($request->get("no_anggota"));
         $jemaat->no_kk         = $request->get("no_kk");
         $jemaat->nama_lengkap  = $request->get("nama_lengkap");
         $jemaat->alamat        = $request->get("alamat");
@@ -267,7 +257,7 @@ class JemaatController extends Controller
 //        $jemaat->tgl_menikah = DateUtil::date2string($request->get("tanggal_menikah"), "Ymd");
         $jemaat->save();
 
-        $user = Users::where('anggota_id',$request->get("anggota_id"))->first();
+        $user = Users::where('no_anggota',$request->get("no_anggota"))->first();
 
         if($user==null){
 
@@ -284,7 +274,7 @@ class JemaatController extends Controller
             }
 
             $user = new Users();
-            $user->anggota_id = $jemaat->anggota_id;
+            $user->no_anggota = $jemaat->no_anggota;
             $user->username = $request->get("username");
             $user->password = md5($request->get("password"));
             $user->role = "JEMAAT";
@@ -321,7 +311,7 @@ class JemaatController extends Controller
                 ->withErrors($validator->errors());
         }
 
-        $anggota = Anggota::find($request->get("anggota_id"));
+        $anggota = Anggota::find($request->get("no_anggota"));
         $anggota->flg_baptis = "I";
         $anggota->save();
 
@@ -331,7 +321,7 @@ class JemaatController extends Controller
         $max_no_baptis = collect(DB::Select("SELECT COUNT(1) as count FROM t_baptisan"))->first();
 
         $baptis = new Baptisan();
-        $baptis->anggota_id = $anggota->anggota_id;
+        $baptis->no_anggota = $anggota->no_anggota;
         $baptis->no_baptis = 'B'.substr(date('Y'), -2).sprintf("%04d", $max_no_baptis->count+1);
 //        $baptis->periode_baptis = $request->get("period_baptis");
         $baptis->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
@@ -350,9 +340,9 @@ class JemaatController extends Controller
 
     }
 
-    public function prosesDataUsulan($anggota_id) {
+    public function prosesDataUsulan($no_anggota) {
 
-        $anggota = Anggota::find($anggota_id);
+        $anggota = Anggota::find($no_anggota);
         $anggota->flg_baptis = "Y";
         $anggota->save();
 
@@ -365,7 +355,7 @@ class JemaatController extends Controller
         $kematian = DB::Select("
             SELECT *
             FROM t_anggota A
-            INNER JOIN t_kematian B ON A.anggota_id = B.anggota_id");
+            INNER JOIN t_kematian B ON A.no_anggota = B.no_anggota");
 
         return view("jemaat.kematian", ["data" => $kematian]);
 
@@ -376,14 +366,14 @@ class JemaatController extends Controller
         $anggota = DB::Select("
                     SELECT *
                     FROM t_anggota A
-                    WHERE NOT EXISTS (SELECT 1 FROM t_kematian B WHERE A.anggota_id = B.anggota_id)
+                    WHERE NOT EXISTS (SELECT 1 FROM t_kematian B WHERE A.no_anggota = B.no_anggota)
                     ORDER BY nama_lengkap
                 ");
 
         $selectedAnggotaId = -99;
         if(!is_null($id) && $id!=-99){
             $selectedAnggota = Anggota::find($id);
-            $selectedAnggotaId = $selectedAnggota->anggota_id;
+            $selectedAnggotaId = $selectedAnggota->no_anggota;
         }
 
         return view("jemaat.tambahDataKematian", ["anggota" => $anggota, "selectedAnggotaId"=>$selectedAnggotaId]);
@@ -407,8 +397,13 @@ class JemaatController extends Controller
                 ->withErrors($validator->errors());
         }
 
+        if(DateUtil::date2string($request->get('tgl_pemakaman'), 'Ymd') < DateUtil::date2string($request->get('tgl_kematian'), 'Ymd')) {
+            Session::flash('err_msg', 'Tanggal kematian harus lebih kecil atau sama dengan tanggal pemakaman');
+            return redirect()->back();
+        }
+
         $kematian = new Kematian();
-        $kematian->anggota_id = $request->get("jemaat");
+        $kematian->no_anggota = $request->get("jemaat");
         $kematian->tempat_pemakaman = $request->get("tempat_pemakaman");
         $kematian->tgl_pemakaman = DateUtil::date2string($request->get('tgl_pemakaman'), 'Ymd');
         $kematian->tgl_kematian = DateUtil::date2string($request->get('tgl_kematian'), 'Ymd');
@@ -426,7 +421,7 @@ class JemaatController extends Controller
 
         $kematian = Kematian::find($id);
 
-        $anggota = Anggota::find($kematian->anggota_id);
+        $anggota = Anggota::find($kematian->no_anggota);
         $anggota->flg_active = "Y";
         $anggota->save();
 
@@ -436,11 +431,11 @@ class JemaatController extends Controller
 
     }
 
-    public function penyerahanAnak($anggota_id) {
+    public function penyerahanAnak($no_anggota) {
 
-        $anggota = Anggota::find($anggota_id);
+        $anggota = Anggota::find($no_anggota);
 
-        $penyerahan_anak = PenyerahanAnak::where("anggota_id", $anggota_id)->get();
+        $penyerahan_anak = PenyerahanAnak::where("no_anggota", $no_anggota)->get();
 
         \Log::debug(json_encode($penyerahan_anak));
 
@@ -451,7 +446,7 @@ class JemaatController extends Controller
     public function doSimapnPenyerahanAnak(Request $request) {
 
         $vaidate = [
-            "anggota_id" => "required",
+            "no_anggota" => "required",
             "nama_anak" => "required",
             "tempat_lahir" => "required",
             "tgl_lahir" => "required",
@@ -471,7 +466,7 @@ class JemaatController extends Controller
         }
 
         $penyerahan_anak = new PenyerahanAnak();
-        $penyerahan_anak->anggota_id = $request->get("anggota_id");
+        $penyerahan_anak->no_anggota = $request->get("no_anggota");
         $penyerahan_anak->nama_anak = $request->get("nama_anak");
         $penyerahan_anak->tempat_lahir = $request->get("tempat_lahir");
         $penyerahan_anak->tgl_lahir = DateUtil::date2string($request->get("tgl_lahir"), 'Ymd');
@@ -498,7 +493,7 @@ class JemaatController extends Controller
 
         $kematin = Kematian::find($id);
 
-        $anggota = Anggota::find($kematin->anggota_id);
+        $anggota = Anggota::find($kematin->no_anggota);
 
         return view('jemaat.editDataKematian', [
             "kematian" => $kematin,
@@ -537,7 +532,7 @@ class JemaatController extends Controller
     public function cetak($id) {
 
         $baptisan = Baptisan::find($id);
-        $anggota = Anggota::find($baptisan->anggota_id);
+        $anggota = Anggota::find($baptisan->no_anggota);
 
         $pdf = PDF::loadView('jemaat.cetak', ["baptisan" => $baptisan, "anggota" => $anggota], []);
         return $pdf->stream("Cetak".'.pdf');
@@ -546,7 +541,7 @@ class JemaatController extends Controller
     public function editBaptisan($id) {
 
         $baptisan = Baptisan::find($id);
-        $anggota = Anggota::find($baptisan->anggota_id);
+        $anggota = Anggota::find($baptisan->no_anggota);
 
         return view('jemaat.editBaptisan', ["baptisan" => $baptisan, "anggota" => $anggota]);
 
@@ -567,7 +562,7 @@ class JemaatController extends Controller
                 ->withErrors($validator->errors());
         }
 
-        $baptisan = Baptisan::find($request->get("anggota_baptis_id"));
+        $baptisan = Baptisan::find($request->get("no_baptis"));
         $baptisan->tanggal_baptis = DateUtil::date2string($request->get("tanggal_baptis"), "Ymd");
         $baptisan->save();
 
@@ -628,7 +623,7 @@ class JemaatController extends Controller
         }
 
         $menikah = new AnggotaMenikah();
-        $menikah->anggota_id = $request->get("anggota_id");
+        $menikah->no_anggota = $request->get("no_anggota");
         $menikah->tgl_daftar = DateUtil::date2string($request->get('tgl_daftar'), 'Ymd');
         $menikah->nama_lengkap_pasangan = $request->get("nama_lengkap_pasangan");
         $menikah->tempat_lahir_pasangan = $request->get("tempat_lahir_pasangan");

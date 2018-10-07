@@ -16,7 +16,7 @@
 
                 {{ csrf_field() }}
 
-                <input type="hidden" name="anggota_id" value="{{ $anggota->anggota_id }}" class="form-control" readonly>
+                <input type="hidden" name="no_anggota" value="{{ $anggota->no_anggota }}" class="form-control" readonly>
 
                 <div class="row">
                     <div class="col-md-12">
