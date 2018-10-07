@@ -1,7 +1,7 @@
 <h2 style="text-align:center;">DATA JEMAAT GITJ PURING JEPARA TAHUN 2018</h2><br>
 <br>
 <br>
-<table border="1" align="center">
+<table border="0.25" align="center">
     <tr>
         <td><b>No</td>
         <td><b>No Anggota</td>
