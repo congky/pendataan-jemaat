@@ -30,7 +30,7 @@
         @endif
 
         @if(authorized("JEMAAT"))
-        <li><a href="/usul-baptis/{{ Session::get("HAS_SESSION")["anggota_id"] }}"><i class="fa fa-circle-o text-red"></i> <span>Usulan Baptisan</span></a></li>
+        <li><a href="/usul-baptis/{{ Session::get("HAS_SESSION")["no_anggota"] }}"><i class="fa fa-circle-o text-red"></i> <span>Usulan Baptisan</span></a></li>
         @endif
 
         @if(authorized("ADMIN,PENDETA"))
@@ -50,7 +50,7 @@
         @endif
 
         @if(authorized("JEMAAT"))
-            <li><a href="/usul-menikah-jemaat/{{ \Session::get("HAS_SESSION")["anggota_id"] }}"><i class="fa fa-circle-o text-red"></i> Usul Menikah</a></li>
+            <li><a href="/usul-menikah-jemaat/{{ \Session::get("HAS_SESSION")["no_anggota"] }}"><i class="fa fa-circle-o text-red"></i> Usul Menikah</a></li>
         @endif
 
         @if(authorized("ADMIN,PENDETA"))
