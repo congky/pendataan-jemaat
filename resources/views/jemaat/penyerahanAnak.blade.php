@@ -34,8 +34,8 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Tanggal Penyerahan <label class="text-danger">*</label></label>
-                            <input type="date" name="tgl_penyerahan" class="form-control" placeholder="Tanggal Penyerahan">
-                            <label class="text-danger">{{$errors->first("tgl_penyerahan") }}</label>
+                            <input type="date" name="tanggal_penyerahan" class="form-control" placeholder="Tanggal Penyerahan">
+                            <label class="text-danger">{{$errors->first("tanggal_penyerahan") }}</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -91,7 +91,7 @@
                                 <td>{{ $value->nama_anak }}</td>
                                 <td>{{ $value->tempat_lahir }}</td>
                                 <td>{{ $value->tgl_lahir }}</td>
-                                <td>{{ $value->tgl_penyerahan }}</td>
+                                <td>{{ $value->tanggal_penyerahan }}</td>
                                 <td>{{ ($value->jenis_kelamin == "L")? "Laki-Laki" : "Perempuan" }}</td>
                                 <td>{{ $value->nama_ayah }}</td>
                                 <td>{{ $value->nama_ibu }}</td>
