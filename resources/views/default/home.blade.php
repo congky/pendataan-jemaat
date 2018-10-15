@@ -14,7 +14,10 @@
 “Membangun Komunitas Damai Sejahtera”<br><br>
 Misi :<br>
 1.  Membangun Kerukunan dengan Allah, dengan Diri Sendiri, dengan Sesama, dan dengan Alam. <br>
-2.  Mengupayakan Kesejahteraan secara Rohani dan Jasmani. <br>
+2.  Mengupayakan Kesejahteraan secara Rohani dan Jasmani. <br><br><br>
+
+
+<img src="{{ URL::asset('admin-lte') }}/dist/img/jadwal.jpg">
 
 
 
