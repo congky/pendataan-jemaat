@@ -17,7 +17,7 @@
                     <!-- User image -->
                     <li class="user-header">
                     
-                        <img src="{{ URL::asset('admin-lte') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{ URL::asset('admin-lte') }}/dist/img/avatar5.png" class="img-circle" alt="User Image">
 
                         {{--<p>--}}
                             {{--Admin--}}
