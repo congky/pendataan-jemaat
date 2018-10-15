@@ -17,7 +17,7 @@ Misi :<br>
 2.  Mengupayakan Kesejahteraan secara Rohani dan Jasmani. <br><br><br>
 
 
-<img src="{{ URL::asset('admin-lte') }}/dist/img/jadwal.jpg">
+<img src="{{ URL::asset('admin-lte') }}/dist/img/jadwal.jpg" alt="User Image">
 
 
 
