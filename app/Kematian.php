@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kematian extends Model
 {
-    protected $primaryKey = "kematian_id";
+    protected $primaryKey = "anggota_kematian_id";
     public $table = "t_kematian";
     public $timestamps = false;
 }

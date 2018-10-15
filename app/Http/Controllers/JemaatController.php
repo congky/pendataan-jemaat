@@ -450,7 +450,7 @@ class JemaatController extends Controller
             "nama_anak" => "required",
             "tempat_lahir" => "required",
             "tgl_lahir" => "required",
-            "tgl_penyerahan" => "required",
+            "tanggal_penyerahan" => "required",
             "jenis_kelamin" => "required",
             "nama_ayah" => "required",
             "nama_ibu" => "required",
@@ -470,7 +470,7 @@ class JemaatController extends Controller
         $penyerahan_anak->nama_anak = $request->get("nama_anak");
         $penyerahan_anak->tempat_lahir = $request->get("tempat_lahir");
         $penyerahan_anak->tgl_lahir = DateUtil::date2string($request->get("tgl_lahir"), 'Ymd');
-        $penyerahan_anak->tgl_penyerahan = DateUtil::date2string($request->get("tgl_penyerahan"), 'Ymd');
+        $penyerahan_anak->tanggal_penyerahan = DateUtil::date2string($request->get("tanggal_penyerahan"), 'Ymd');
         $penyerahan_anak->jenis_kelamin = $request->get("jenis_kelamin");
         $penyerahan_anak->nama_ayah = $request->get("nama_ayah");
         $penyerahan_anak->nama_ibu = $request->get("nama_ibu");
@@ -527,8 +527,8 @@ class JemaatController extends Controller
 
         return redirect("/data-kematian");
 
-    }
 
+    }
     public function cetak($id) {
 
         $baptisan = Baptisan::find($id);

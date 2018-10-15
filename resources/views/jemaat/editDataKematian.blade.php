@@ -16,7 +16,7 @@
             <div class="box-body">
                 {{ csrf_field() }}
 
-                <input type="hidden" name="kematian_id" class="form-control" value="{{ $kematian->kematian_id }}">
+                <input type="hidden" name="anggota_kematian_id" class="form-control" value="{{ $kematian->anggota_kematian_id }}">
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Jemaat</label>

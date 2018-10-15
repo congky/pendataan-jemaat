@@ -36,8 +36,8 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/edit-data-kematian/{{ $value->kematian_id }}">Ubah</a></li>
-                                    <li><a href="/hapus-data-kematian/{{ $value->kematian_id }}">Hapus</a></li>
+                                    <li><a href="/edit-data-kematian/{{ $value->anggota_kematian_id }}">Ubah</a></li>
+                                    <li><a href="/hapus-data-kematian/{{ $value->anggota_kematian_id }}">Hapus</a></li>
                                 </ul>
                             </div>
                         </td>
