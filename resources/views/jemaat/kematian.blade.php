@@ -17,7 +17,9 @@
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                    @if(authorized("ADMIN"))
                     <th>Aksi</th>
+                    @endif
                     <th>No Anggota</th>
                     <th>Nama Lengkap</th>
                     <th>Tempat Pemakaman</th>
