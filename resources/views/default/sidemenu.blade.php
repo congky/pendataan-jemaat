@@ -37,7 +37,7 @@
         <li><a href="/data-jemaat"><i class="fa fa-circle-o text-red"></i> <span>Data Jemaat</span></a></li>
         @endif
 
-        @if(authorized("ADMIN, PENDETA"))
+        @if(authorized("ADMIN,PENDETA"))
         <li><a href="/data-baptisan"><i class="fa fa-circle-o text-yellow"></i> <span>Data Baptisan</span></a></li>
         @endif
 
@@ -45,7 +45,7 @@
         <li><a href="/data-usulan-baptisan"><i class="fa fa-circle-o text-red"></i> <span>Data Usulan Baptisan</span></a></li>
         @endif
 
-        @if(authorized("ADMIN"))
+        @if(authorized("ADMIN,PENDETA"))
             <li><a href="/lihat-data-pernikahan"><i class="fa fa-circle-o text-aqua"></i> <span>Data Pernikahan</span></a></li>
         @endif
 
@@ -61,7 +61,7 @@
         {{--<li><a href="/cari-pasangan"><i class="fa fa-circle-o text-yellow"></i> <span>Cari Pasangan</span></a></li>--}}
         {{--@endif--}}
 
-        @if(authorized("ADMIN"))
+        @if(authorized("ADMIN,PENDETA"))
         <li><a href="/data-kematian"><i class="fa fa-circle-o text-aqua"></i> <span>Data Kematian</span></a></li>
         @endif
 
