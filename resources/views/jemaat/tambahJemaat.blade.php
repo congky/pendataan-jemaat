@@ -112,7 +112,7 @@
         {{--</div>--}} -->
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="flg_baptis"> Baptis Greja Lain
+            <input type="checkbox" name="flg_baptis"> Sudah dibaptis
           </label>
         </div>
        <!--- <div class="form-group">

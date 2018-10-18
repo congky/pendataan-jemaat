@@ -37,7 +37,7 @@
         <li><a href="/data-jemaat"><i class="fa fa-circle-o text-red"></i> <span>Data Jemaat</span></a></li>
         @endif
 
-        @if(authorized("ADMIN"))
+        @if(authorized("ADMIN, PENDETA"))
         <li><a href="/data-baptisan"><i class="fa fa-circle-o text-yellow"></i> <span>Data Baptisan</span></a></li>
         @endif
 

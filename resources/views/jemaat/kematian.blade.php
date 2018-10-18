@@ -28,6 +28,7 @@
                 <tbody>
                 @foreach($data as $key=>$value)
                     <tr>
+                    @if(authorized("ADMIN"))
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info">Aksi</button>
@@ -41,6 +42,7 @@
                                 </ul>
                             </div>
                         </td>
+                        @endif
                         <td>{{ $value->no_anggota}}</td>
                         <td>{{ $value->nama_lengkap}}</td>
                         <td>{{ $value->tempat_pemakaman}}</td>

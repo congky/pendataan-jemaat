@@ -1,3 +1,4 @@
+
 @extends("default.default")
 @section("head")
     <title>Home</title>
@@ -25,6 +26,7 @@
                 <tbody>
                 @foreach($anggota as $key=>$value)
 	                <tr>
+                    @if(authorized("ADMIN"))
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info">Aksi</button>
@@ -38,6 +40,7 @@
                                 </ul>
                             </div>
                         </td>
+                        @endif
 	                    <td>{{ $value->no_anggota}}</td>
 	                    <td>{{ $value->no_baptis}}</td>
 	                    <td>{{ $value->nama_lengkap}}</td>
