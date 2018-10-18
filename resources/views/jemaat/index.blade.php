@@ -31,6 +31,7 @@
                     <th>JK</th>
                     <th>No telepon</th>
                     <th>Tanggal Lahir</th>
+                    <th>Status Baptis</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,6 +67,7 @@
                         <td>{{ $value->jenis_kelamin}}</td>
                         <td>{{ $value->no_telp}}</td>
                         <td>{{ \App\Helpers\DateUtil::date2_display($value->tgl_lahir) }}</td>
+                        <td>{{ $value->flg_baptis}}</td>
 	                </tr>
 	            @endforeach
                 </tbody>
