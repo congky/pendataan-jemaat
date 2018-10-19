@@ -599,7 +599,6 @@ class JemaatController extends Controller
     public function simpanUsulanJemaat(Request $request) {
 
         $vaidate = [
-            "tgl_daftar" => "required",
             "nama_lengkap_pasangan" => "required",
             "tempat_lahir_pasangan" => "required",
             "alamat_pasangan" => "required",
@@ -624,7 +623,7 @@ class JemaatController extends Controller
 
         $menikah = new AnggotaMenikah();
         $menikah->no_anggota = $request->get("no_anggota");
-        $menikah->tgl_daftar = DateUtil::date2string($request->get('tgl_daftar'), 'Ymd');
+        $menikah->tgl_daftar = DateUtil::date2string($request->get('tgl_daftar'), new(date('Ymd'));
         $menikah->nama_lengkap_pasangan = $request->get("nama_lengkap_pasangan");
         $menikah->tempat_lahir_pasangan = $request->get("tempat_lahir_pasangan");
         $menikah->tgl_lahir_pasangan = DateUtil::date2string($request->get("tgl_lahir_pasangan"), 'Ymd');
