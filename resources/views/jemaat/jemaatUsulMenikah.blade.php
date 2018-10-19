@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Tanggal Daftar <label class="text-danger">*</label></label>
-                                <input type="date" name="tgl_daftar" class="form-control" placeholder="Tanggal Daftar">
+                                <input type="date" name="tgl_daftar" class="form-control" placeholder="Tanggal Daftar" value="<?php echo date('d-M-Y')?>" readonly>
                                 <label class="text-danger">{{$errors->first("tgl_daftar") }}</label>
                             </div>
 
