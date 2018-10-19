@@ -28,6 +28,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputPassword1">Tanggal Daftar <label class="text-danger">*</label></label>
+                                <input type="date" name="tgl_daftar" class="form-control" placeholder="Tanggal Daftar" readonly>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Lengkap pasangan <label class="text-danger">*</label></label>
                                 <input type="text" name="nama_lengkap_pasangan" class="form-control" placeholder="Nama Lengkap pasangan">
                                 <label class="text-danger">{{$errors->first("nama_lengkap_pasangan") }}</label>
