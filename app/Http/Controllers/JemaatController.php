@@ -233,7 +233,7 @@ class JemaatController extends Controller
             "alamat"        => "required",
             "tempat_lahir"  => "required",
             "tgl_lahir"     => "required",
-            "status"        => "status",
+            "status"        => "required",
             "jenis_kelamin" => "required",
             "username"      => "required"
         ];
