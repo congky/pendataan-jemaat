@@ -595,7 +595,10 @@ class JemaatController extends Controller
     public function usulMenikahJemaat($id) {
         $anggota = Anggota::find($id);
 
-        return view("jemaat.jemaatUsulMenikah", ["anggota" => $anggota]);
+        return view("jemaat.jemaatUsulMenikah", [
+                        "anggota" => $anggota,
+                        "currentDate" => date('Y-m-d')
+                    ]);
 
     }
 
@@ -626,7 +629,7 @@ class JemaatController extends Controller
 
         $menikah = new AnggotaMenikah();
         $menikah->no_anggota = $request->get("no_anggota");
-        $menikah->tgl_daftar = new date('Ymd');
+        $menikah->tgl_daftar = DateUtil::dateNow();
         $menikah->nama_lengkap_pasangan = $request->get("nama_lengkap_pasangan");
         $menikah->tempat_lahir_pasangan = $request->get("tempat_lahir_pasangan");
         $menikah->tgl_lahir_pasangan = DateUtil::date2string($request->get("tgl_lahir_pasangan"), 'Ymd');
