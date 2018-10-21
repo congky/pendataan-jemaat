@@ -132,11 +132,12 @@ class JemaatController extends Controller
             "no_kk"         => "required",
             "nama_lengkap"  => "required",
             "alamat"        => "required",
-            "email"        => "required",
+            "email"         => "required",
             "tempat_lahir"  => "required",
             "tgl_lahir"     => "required",
             "jenis_kelamin" => "required",
-            "pekerjaan" => "required",
+            "status"        => "required",
+            "pekerjaan"     => "required",
             "kewarganegaraan" => "required",
             "nama_ayah" => "required",
             "nama_ibu" => "required",
@@ -171,13 +172,14 @@ class JemaatController extends Controller
         $jemaat->alamat        = $request->get("alamat");
         $jemaat->email         = $request->get("email");
         $jemaat->jenis_kelamin = $request->get("jenis_kelamin");
+        $jemaat->status        = $request->get("status");
         $jemaat->no_telp       = $request->get("no_telp");
         $jemaat->tempat_lahir  = $request->get("tempat_lahir");
         $jemaat->tgl_lahir     = DateUtil::date2string($request->get("tgl_lahir"), "Ymd");
         $jemaat->pekerjaan     = $request->get("pekerjaan");
         $jemaat->kewarganegaraan = $request->get("kewarganegaraan");
         $jemaat->nama_ayah       = $request->get("nama_ayah");
-        $jemaat->nama_ibu          = $request->get("nama_ibu");
+        $jemaat->nama_ibu        = $request->get("nama_ibu");
 
         if(is_null($request->get("flg_baptis"))){
             $jemaat->flg_baptis = "N";
@@ -231,6 +233,7 @@ class JemaatController extends Controller
             "alamat"        => "required",
             "tempat_lahir"  => "required",
             "tgl_lahir"     => "required",
+            "status"        => "status",
             "jenis_kelamin" => "required",
             "username"      => "required"
         ];
@@ -250,6 +253,7 @@ class JemaatController extends Controller
         $jemaat->alamat        = $request->get("alamat");
         $jemaat->email         = $request->get("email");
         $jemaat->jenis_kelamin = $request->get("jenis_kelamin");
+        $jemaat->status        = $request->get("status");
         $jemaat->no_telp       = $request->get("no_telp");
         $jemaat->tempat_lahir  = $request->get("tempat_lahir");
         $jemaat->tgl_lahir     = DateUtil::date2string($request->get("tgl_lahir"), "Ymd");
@@ -446,14 +450,14 @@ class JemaatController extends Controller
     public function doSimapnPenyerahanAnak(Request $request) {
 
         $vaidate = [
-            "no_anggota" => "required",
-            "nama_anak" => "required",
-            "tempat_lahir" => "required",
-            "tgl_lahir" => "required",
-            "tanggal_penyerahan" => "required",
-            "jenis_kelamin" => "required",
-            "nama_ayah" => "required",
-            "nama_ibu" => "required",
+            "no_anggota"           => "required",
+            "nama_anak"            => "required",
+            "tempat_lahir"         => "required",
+            "tgl_lahir"            => "required",
+            "tanggal_penyerahan"   => "required",
+            "jenis_kelamin"        => "required",
+            "nama_ayah"            => "required",
+            "nama_ibu"             => "required",
         ];
 
         $validator = Validator::make($request->all(), $vaidate);
@@ -526,7 +530,6 @@ class JemaatController extends Controller
         $kematian->save();
 
         return redirect("/data-kematian");
-
 
     }
     public function cetak($id) {
