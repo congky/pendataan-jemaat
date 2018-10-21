@@ -78,11 +78,13 @@
       	</label><br>
           <label class="text-danger">{{$errors->first("jenis_kelamin") }}</label>
         </div>
+
         <div class="form-group">
           <label for="exampleInputFile">Status <label class="text-danger">*</label></label>
-          <input type="text" name="status"  class="form-control" value="{{ $status }}" >
+          <input type="text" name="status"  class="form-control" value="{{ $anggota->$status }}" >
           <label class="text-danger">{{$errors->first("status") }}</label>
         </div>
+        
         <div class="form-group">
           <label for="exampleInputFile">No Telepon</label>
           <input type="text" name="no_telp"  class="form-control" value="{{ $anggota->no_telp }}" >
