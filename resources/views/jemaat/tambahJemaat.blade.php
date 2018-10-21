@@ -66,7 +66,11 @@
         </label><br>
         <label class="text-danger">{{$errors->first("jenis_kelamin") }}</label>
         </div>
-        
+        <div class="form-group">
+              <label for="exampleInputUsername">Status<label class="text-danger">*</label></label>
+              <input type="text" name="status" class="form-control" placeholder="status">
+              <label class="text-danger">{{$errors->first("status") }}</label>
+          </div>
         <div class="form-group">
           <label for="exampleInputFile">No Telepon</label>
           <input type="text" name="no_telp"  class="form-control" placeholder="nomer telepon" >
