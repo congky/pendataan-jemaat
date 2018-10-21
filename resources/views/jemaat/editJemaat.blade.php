@@ -45,7 +45,7 @@
 
         <div class="form-group">
           <label for="exampleInputFile">Username <label class="text-danger">*</label></label>
-          <input type="text" name="username"  class="form-control" value="{{ $username}}" >
+          <input type="text" name="username"  class="form-control" value="{{ $username }}" >
           <label class="text-danger">{{$errors->first("username") }}</label>
         </div>
 
@@ -80,12 +80,12 @@
         </div>
         <div class="form-group">
           <label for="exampleInputFile">Status <label class="text-danger">*</label></label>
-          <input type="text" name="status"  class="form-control" value="{{ $status}}" >
+          <input type="text" name="status"  class="form-control" value="{{ $status }}" >
           <label class="text-danger">{{$errors->first("status") }}</label>
         </div>
         <div class="form-group">
           <label for="exampleInputFile">No Telepon</label>
-          <input type="text" name="no_telp"  class="form-control" value="{{ $anggota->no_telp}}" >
+          <input type="text" name="no_telp"  class="form-control" value="{{ $anggota->no_telp }}" >
         </div>
         <div class="form-group">
           <label for="exampleInputFile">Tempat Lahir <label class="text-danger">*</label></label>
