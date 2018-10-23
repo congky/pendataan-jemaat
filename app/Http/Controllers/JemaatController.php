@@ -532,7 +532,7 @@ class JemaatController extends Controller
         return redirect("/data-kematian");
 
     }
-    public function cetak($id) {
+    public function ($id) {
 
         $baptisan = Baptisan::find($id);
         $anggota = Anggota::find($baptisan->no_anggota);
@@ -581,6 +581,15 @@ class JemaatController extends Controller
         return $pdf->stream("CetakSemuaJemaat".'.pdf');
 
     }
+
+     public function cetakBaptis() {
+
+
+        $pdf = PDF::loadView('jemaat.cetakSemuaBaptisan', ["baptisan" => $anggota], []);
+        return $pdf->stream("CetakSemuaBaptisan".'.pdf');
+
+    }
+   
 
     public function cariPasangan() {
 

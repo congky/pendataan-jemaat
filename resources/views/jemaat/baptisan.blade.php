@@ -12,7 +12,9 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-
+            @if(authorized("ADMIN"))
+            <a href="/cetak-baptis" class="btn btn-primary"> Cetak </a><br><br>
+        @endif
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
