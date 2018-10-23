@@ -532,7 +532,7 @@ class JemaatController extends Controller
         return redirect("/data-kematian");
 
     }
-    public function ($id) {
+    public function cetak($id) {
 
         $baptisan = Baptisan::find($id);
         $anggota = Anggota::find($baptisan->no_anggota);
