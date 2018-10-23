@@ -13,7 +13,9 @@
         <div class="box-body">
         <!--
             <a href="/tambah-data-kematian/-99" class="btn btn-primary">Tambah Data Kematian</a><br><br>
--->
+-->         @if(authorized("ADMIN"))
+            <a href="/cetak-kematian" class="btn btn-primary"> Cetak </a><br><br>
+        @endif
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
