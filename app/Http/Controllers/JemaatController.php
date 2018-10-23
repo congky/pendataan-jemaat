@@ -584,7 +584,7 @@ class JemaatController extends Controller
 
      public function cetakBaptis() {
 
-
+        $baptisan = Baptisan::find($id);
      $pdf = PDF::loadView('baptisan.cetakSemuaBaptisan', ["baptisan" => $anggota], []);
     return $pdf->stream("CetakSemuaBaptisan".'.pdf');
 
