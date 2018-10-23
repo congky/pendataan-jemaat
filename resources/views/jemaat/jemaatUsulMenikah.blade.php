@@ -22,17 +22,7 @@
                     <div class="col-md-12">
 
                         <div class="col-md-6">
-                         <div class="form-group">
-                                <label for="exampleInputFile">Nama Jemaat <label class="text-danger">*</label></label>
-                                <select name="jemaat" class="form-control">
-                                    <option value="" selected>-- Pilih Jemaat --</option>
-                                    @foreach($anggota as $key=>$value)
-                                        <option value="{{ $value->no_anggota }}">{{ $value->no_anggota }} - {{ $value->nama_lengkap }}</option>
-                                    @endforeach
-                                </select>
-                                <label class="text-danger">{{$errors->first("jemaat") }}</label>
-                            </div>
-                            
+                        
                             <div class="form-group">
                                 <label for="exampleInputFile">Nama Jemaat <label class="text-danger">*</label></label>
                                 <input type="text" value="{{ $anggota->nama_lengkap }}" class="form-control" readonly>
