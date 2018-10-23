@@ -582,13 +582,13 @@ class JemaatController extends Controller
 
     }
 
-     //public function cetakBaptis() {
+     public function cetakBaptis() {
 
+        $baptisan = Baptisan::find($request->get("no_baptis"));
+        $pdf = PDF::loadView('Baptisan.cetakSemuaBaptisan', ["Baptisan" => $anggota], []);
+        return $pdf->stream("CetakSemuaBaptisan".'.pdf');
 
-     //   $pdf = PDF::loadView('baptisan.cetakSemuaBaptisan', ["baptisan" => $anggota], []);
-     //   return $pdf->stream("CetakSemuaBaptisan".'.pdf');
-
-    //}
+    }
    
 
     public function cariPasangan() {
