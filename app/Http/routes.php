@@ -55,7 +55,7 @@ Route::group(["middleware" => "login.user"], function() {
     Route::any('/edit-data-baptisan', 'JemaatController@doEditBaptisan');
     Route::any('/lihat-data-diri', 'JemaatController@viewLihatDataDiri');
     Route::any('/cetak-all', 'JemaatController@cetakAll');
-    Route::any('/cetak-baptis', 'JemaatController@cetakBaptis');
+    //Route::any('/cetak-baptis', 'JemaatController@cetakBaptis');
     Route::any('/cari-pasangan', 'JemaatController@cariPasangan');
     Route::any('/usul-menikah-jemaat/{id}', 'JemaatController@usulMenikahJemaat');
     Route::any('/simpan-data-usulan-jemaat', 'JemaatController@simpanUsulanJemaat');
