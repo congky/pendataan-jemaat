@@ -516,6 +516,11 @@ class JemaatController extends Controller
 
         $validator = Validator::make($request->all(), $vaidate);
 
+        if(DateUtil::date2string($request->get('tgl_pemakaman'), 'Ymd') < DateUtil::date2string($request->get('tgl_kematian'), 'Ymd')) {
+            Session::flash('err_msg', 'Tanggal kematian harus lebih kecil atau sama dengan tanggal pemakaman');
+            return redirect()->back();
+        }
+
         if ($validator->fails()) {
             return redirect()
                 ->back()
@@ -603,10 +608,17 @@ class JemaatController extends Controller
 
     public function usulMenikahJemaat($id) {
         $anggota = Anggota::find($id);
+        $anggotaMenikah = AnggotaMenikah::where("no_anggota", "'".$anggota->no_anggota."'")->get();
+
+        $statusMenikah = false;
+        if(!is_null($anggotaMenikah)) {
+            $statusMenikah = true;
+        }
 
         return view("jemaat.jemaatUsulMenikah", [
                         "anggota" => $anggota,
-                        "currentDate" => date('Y-m-d')
+                        "currentDate" => date('Y-m-d'),
+                        "statusMenikah" => $statusMenikah
                     ]);
 
     }

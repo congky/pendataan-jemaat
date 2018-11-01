@@ -10,6 +10,12 @@
             <h3 class="box-title">Tambah Data Kematian</h3>
         </div>
 
+        @if(Session::has("err_msg"))
+            <div class="alert alert-danger">
+                {{Session::get("err_msg")}}.
+            </div>
+        @endif
+
         <!-- /.box-header -->
         <!-- form start -->
         <form role="form" action="/do-simpan-data-kematian" method="post">

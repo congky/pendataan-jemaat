@@ -7,9 +7,16 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Usulan Pernikahan</h3>
+            <h3 class="box-title">
+                @if($statusMenikah)
+                    Anda sudah mengusulkan Pernikahan
+                @else
+                    Usulan Pernikahan
+                @endif
+            </h3>
         </div>
 
+        @if(!$statusMenikah)
         <div class="box-body">
 
             <form role="form" action="/simpan-data-usulan-jemaat" method="post">
@@ -113,6 +120,7 @@
             </form>
 
         </div>
+            @endif
 
 
     </div>
