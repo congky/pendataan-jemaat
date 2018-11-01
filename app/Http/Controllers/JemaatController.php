@@ -608,9 +608,10 @@ class JemaatController extends Controller
 
     public function usulMenikahJemaat($id) {
         $anggota = Anggota::find($id);
-        $anggotaMenikah = AnggotaMenikah::where("no_anggota", "'".$anggota->no_anggota."'")->get();
+        $anggotaMenikah = AnggotaMenikah::where("no_anggota", $anggota->no_anggota)->first();
 
         $statusMenikah = false;
+
         if(!is_null($anggotaMenikah)) {
             $statusMenikah = true;
         }
